@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="30dp" />
+
+        <LinearLayout
+            android:id="@+id/linearHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_slice_1"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Medical History"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diseases"
+            app:layout_constraintStart_toStartOf="@id/guidelineText"
+            app:layout_constraintTop_toBottomOf="@+id/linearHeader"
+            style="@style/EditTitle"
+            />
+
+        <EditText
+            android:id="@+id/edtDisease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_rounded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv1"
+            style="@style/Editable"
+            />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            app:layout_constraintStart_toStartOf="@id/guidelineText"
+            app:layout_constraintTop_toBottomOf="@id/edtDisease"
+            style="@style/EditTitle"
+            />
+
+        <EditText
+            android:id="@+id/edtFrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Editable"
+            android:background="@drawable/form_rounded"
+            app:layout_constraintTop_toBottomOf="@id/tv2"
+            android:inputType="none"
+            />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Until"
+            app:layout_constraintStart_toStartOf="@id/guidelineText"
+            app:layout_constraintTop_toBottomOf="@id/edtFrom"
+            style="@style/EditTitle"
+            />
+
+        <EditText
+            android:id="@+id/edtUntil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Editable"
+            android:background="@drawable/form_rounded"
+            app:layout_constraintTop_toBottomOf="@id/tv3"
+            android:inputType="none"
+            />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Checkup Location"
+            app:layout_constraintStart_toStartOf="@id/guidelineText"
+            app:layout_constraintTop_toBottomOf="@id/edtUntil"
+            style="@style/EditTitle"
+            />
+
+        <EditText
+            android:id="@+id/edtLoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Editable"
+            android:background="@drawable/form_rounded"
+            app:layout_constraintTop_toBottomOf="@id/tv4"
+            />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Checkup Result"
+            app:layout_constraintStart_toStartOf="@id/guidelineText"
+            app:layout_constraintTop_toBottomOf="@id/edtLoc"
+            style="@style/EditTitle"
+            />
+
+        <EditText
+            android:id="@+id/edtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Editable"
+            android:background="@drawable/form_rounded"
+            app:layout_constraintTop_toBottomOf="@id/tv5"
+            />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="@style/Button"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintTop_toBottomOf="@id/edtResult"
+            android:layout_marginTop="32dp"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
