@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
             val id = check[0].id
             Log.d("checkApakahBisa", id.toString())
             val intent = Intent(this, DashboardActivity::class.java)
-            intent.putExtra("userId", id)
-            intent.putExtra("username", x)
+            Global.userId = id
+            Global.username = x
             startActivity(intent)
         } else {
             Toast.makeText(this, "Akun tidak sesuai", Toast.LENGTH_SHORT).show()

@@ -24,9 +24,8 @@ class DashboardActivity : AppCompatActivity() {
 
         setDatabase()
 
-        val intent = intent
-        val userId = intent.getIntExtra("userId", 0)
-        val username = intent.getStringExtra("username")
+        val userId = Global.userId
+        val username = Global.username
 
         val btnAdd : ImageButton = findViewById(R.id.btAdd)
         val btRefresh : ImageButton = findViewById(R.id.btRefresh)
@@ -37,26 +36,10 @@ class DashboardActivity : AppCompatActivity() {
         tvPengguna.text = username
 
         //configure list adapter
-        list = dao.getAll(userId)
-        adapter = RvAdapter(list)
-        listView.adapter = adapter
-        adapter.callableOnClick(object : RvAdapter.IOonClicked {
-            override fun onClicked(medhis: MedHistory) {
-                val intents = Intent(this@DashboardActivity, DetailActivity::class.java)
-                intents.putExtra("id", medhis.id)
-                intents.putExtra("userId", userId)
-                startActivity(intents)
-            }
+        refresh(userId)
 
-            override fun onDelete(medhis: MedHistory) {
-                dao.delete(medhis.id)
-                refresh(userId, username!!)
-            }
-
-        })
-
-        btnAdd.setOnClickListener { addData(userId) }
-        btRefresh.setOnClickListener { refresh(userId, username!!) }
+        btnAdd.setOnClickListener { addData(userId, username!!) }
+        btRefresh.setOnClickListener { refresh(userId) }
     }
 
     fun setDatabase() {
@@ -64,19 +47,26 @@ class DashboardActivity : AppCompatActivity() {
         dao = database.getMedDAO()
     }
 
-    fun addData(id : Int) {
+    fun addData(id : Int, username: String) {
         val intent = Intent(this, EditActivity::class.java)
-        intent.putExtra("userId", id)
         startActivity(intent)
     }
 
-    fun refresh(id: Int, username : String) {
-        val i = Intent(this, DashboardActivity::class.java)
-        i.putExtra("userId", id)
-        i.putExtra("username", username)
-        finish()
-        overridePendingTransition(0, 0)
-        startActivity(i)
-        overridePendingTransition(0, 0)
+    fun refresh(userId : Int) {
+        list = dao.getAll(userId)
+        adapter = RvAdapter(list)
+        listView.adapter = adapter
+        adapter.callableOnClick(object : RvAdapter.IOonClicked {
+            override fun onClicked(medhis: MedHistory) {
+                val intents = Intent(this@DashboardActivity, DetailActivity::class.java)
+                startActivity(intents)
+            }
+
+            override fun onDelete(medhis: MedHistory) {
+                dao.delete(medhis.id)
+                refresh(userId)
+            }
+
+        })
     }
 }

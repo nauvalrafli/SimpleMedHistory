@@ -3,6 +3,7 @@ package com.example.simplemedhistory
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.EditText
 import com.example.simplemedhistory.data.MedDAO
@@ -22,7 +23,8 @@ class EditActivity : AppCompatActivity() {
         //get intent
         val intent = intent
         val id = intent.getIntExtra("id", -1)
-        val userId = intent.getIntExtra("userId", 0)
+        val userId = Global.userId
+        val username = Global.username
 
         //set database
         setDatabase()
@@ -46,6 +48,7 @@ class EditActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             save(id, userId, disease.text.toString(), from.text.toString(),
                 until.text.toString(), loc.text.toString(), result.text.toString())
+            timer(id, username!!)
         }
     }
 
@@ -59,14 +62,24 @@ class EditActivity : AppCompatActivity() {
         if (id < 0 ) {
             val medhis = MedHistory(userId, disease, from, until, loc, result)
             dao.add(medhis)
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
+
         } else {
             val medhis = MedHistory(id, userId, disease, from, until, loc, result)
             dao.update(medhis)
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
         }
+    }
+
+    fun timer(id : Int, username :String) {
+        object : CountDownTimer(1000, 500) {
+
+            override fun onTick(millisUntilFinished: Long) {}
+
+            override fun onFinish() {
+                val intent = Intent(this@EditActivity, DashboardActivity::class.java)
+                startActivity(intent)
+            }
+        }.start()
+
     }
 
 }
