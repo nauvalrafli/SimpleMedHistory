@@ -18,29 +18,48 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_slice_1"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="32dp"
                 >
 
-                <TextView
+                <LinearLayout
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Text40"
-                    android:text="Welcome,"
-                    />
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Text40"
+                        android:text="Welcome,"
+                        />
 
-                <TextView
-                    android:id="@+id/tvPengguna"
-                    style="@style/Text40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pengguna" />
+                    <TextView
+                        android:id="@+id/tvPengguna"
+                        style="@style/Text40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengguna" />
+                </LinearLayout>
 
-            </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btLogOut"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="right"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/ic_power_settings_new_black_24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/blueButton" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -72,8 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/btAdd"
-                    android:src="@drawable/ic_refresh_black_24dp"
                     android:backgroundTint="@color/white"
+                    android:src="@drawable/ic_refresh_black_24dp"
                     app:tint="@color/blueButton" />
 
 
@@ -85,6 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingBottom="64dp"
+                android:clipToPadding="false"
                 />
         </LinearLayout>
         

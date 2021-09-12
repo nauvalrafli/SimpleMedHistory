@@ -1,27 +1,22 @@
 package com.example.simplemedhistory
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import com.example.simplemedhistory.data.MedDAO
-import com.example.simplemedhistory.data.MedDB
+import androidx.appcompat.app.AppCompatActivity
 import com.example.simplemedhistory.data.model.MedHistory
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var dao : MedDAO
+    private val dao = Global.medDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
         val intent = intent
-        val id = intent.getIntExtra("id", -1)
-
-        setDatabase()
+        val id = Global.dataId
 
         //get component
         val disease : TextView = findViewById(R.id.diseaseTitle)
@@ -44,19 +39,13 @@ class DetailActivity : AppCompatActivity() {
         btEdit.setOnClickListener { goEdit(id) }
     }
 
-    fun setDatabase() {
-        val database = MedDB.getDatabase(this)
-        dao = database.getMedDAO()
+    private fun fetchDataWithId(id: Int): MedHistory {
+        return dao.fetchDataWithId(id)
     }
 
-    fun fetchDataWithId(id : Int) : MedHistory {
-        val data = dao.fetchDataWithId(id)
-        return data
-    }
-
-    fun goEdit(id : Int) {
+    private fun goEdit(id : Int) {
         val intent = Intent(this, EditActivity::class.java)
-        intent.putExtra("id", id)
+        Global.dataId = id
         startActivity(intent)
     }
 }

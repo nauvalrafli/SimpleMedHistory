@@ -1,20 +1,15 @@
 package com.example.simplemedhistory
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.room.Database
+import androidx.appcompat.app.AppCompatActivity
 import com.example.simplemedhistory.data.AccountDAO
 import com.example.simplemedhistory.data.AccountDB
-import com.example.simplemedhistory.data.MedDB
 import com.google.android.material.textfield.TextInputEditText
-import org.w3c.dom.Text
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //set database
         setDatabase()
 
         //findId
@@ -48,9 +44,8 @@ class MainActivity : AppCompatActivity() {
     private fun login(x: String, y:String){
         val check = dao.login(x, y)
         Log.d("check", check.toString())
-        if (check.size > 0) {
+        if (check.isNotEmpty()) {
             val id = check[0].id
-            Log.d("checkApakahBisa", id.toString())
             val intent = Intent(this, DashboardActivity::class.java)
             Global.userId = id
             Global.username = x

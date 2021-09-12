@@ -1,16 +1,15 @@
 package com.example.simplemedhistory
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.simplemedhistory.data.AccountDAO
 import com.example.simplemedhistory.data.AccountDB
 import com.example.simplemedhistory.data.model.Account
 import com.google.android.material.textfield.TextInputEditText
-import javax.security.auth.login.LoginException
 
 class SignupActivity : AppCompatActivity() {
 
@@ -36,22 +35,22 @@ class SignupActivity : AppCompatActivity() {
         btnLogin.setOnClickListener { login() }
     }
 
-    fun setDatabase() {
+    private fun setDatabase() {
         val database = AccountDB.getDatabase(this)
         dao = database.getAccDAO()
     }
 
-    fun extractStr(view : TextInputEditText) : String {
+    private fun extractStr(view : TextInputEditText) : String {
         return view.text.toString()
     }
 
-    fun signUp(accounts : Account) {
+    private fun signUp(accounts : Account) {
         dao.signUp(accounts)
         Toast.makeText(this, "Akun berhasil dibuat", Toast.LENGTH_SHORT).show()
         login()
     }
 
-    fun login() {
+    private fun login() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
